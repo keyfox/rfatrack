@@ -39,10 +39,10 @@ def main():
     max_id, tweets = track_rfatweets(
         RFATRACK_ACCOUNT_SCREEN_NAME, since_id=progress["newest_fetched"]
     )
-    for record in map(rfatweets.to_logrecord, tweets):
-        post_to_spreadsheet(RFATRACK_SPREADSHEET_ENDPOINT, record)
-
-    progress["newest_fetched"] = max_id
+    if max_id is not None:
+        for record in map(rfatweets.to_logrecord, tweets):
+            post_to_spreadsheet(RFATRACK_SPREADSHEET_ENDPOINT, record)
+        progress["newest_fetched"] = max_id
     save_progress(progress, RFATRACK_PROGRESS_FILE_PATH)
 
 

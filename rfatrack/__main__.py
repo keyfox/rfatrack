@@ -13,7 +13,7 @@ from .progress import load_progress, save_progress
 
 
 def post_to_spreadsheet(endpoint, payload):
-    with requests.post(endpoint, json=payload) as res:
+    with requests.post(endpoint, json=payload, allow_redirects=True) as res:
         return res.json()
 
 
